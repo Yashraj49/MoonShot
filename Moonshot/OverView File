@@ -1,0 +1,153 @@
+When we create an Image view in SwiftUI, it will automatically size itself according to the dimensions of its contents. So, if the picture is 1000x500, the Image view will also be 1000x500.
+
+If you want the image contents to be resized too, we need to use the resizable() modifier like this:
+
+Image("Example")
+    .resizable()
+    .frame(width: 300, height: 300)
+    
+    scaledToFit() and scaledToFill() modifiers. The first of these means the entire image will fit inside the container even if that means leaving some parts of the view empty, and the second means the view will have no empty parts even if that means some of our image lies outside the container
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+GeometryReader is a view just like the others we’ve used, except when we create it we’ll be handed a GeometryProxy object to use. This lets us query the environment: how big is the container? What position is our view? Are there any safe area insets? And so on
+
+In principle that seems simple enough, but in practice you need to use GeometryReader carefully because it automatically expands to take up available space in your layout, then positions its own content aligned to the top-left corner.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Tip: If you ever want to center a view inside a GeometryReader, rather than aligning to the top-left corner, add a second frame that makes it fill the full space of the container, like this:
+
+GeometryReader { geo in
+    Image("Image Name here ")
+        .resizable()
+        .scaledToFit()
+        .frame(width: geo.size.width * 0.8)
+        .frame(width: geo.size.width, height: geo.size.height)
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ScrollView() {
+            LazyVStack(spacing: 10) {
+                ForEach(0..<100) {
+                    CustomText("Item \($0)")
+                        .font(.title)
+                }
+            }
+            .frame(maxWidth: .infinity)
+        }
+
+    }
+}
+
+struct CustomText: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
+    }
+
+    init(_ text: String) {
+        print("Creating a new CustomText")
+        self.text = text
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+That text view is just static text; it’s not a button with any sort of action attached to it. We’re going to make it so that when the user taps on “Hello, world!” we present them with a new view, and that’s done using NavigationLink: give this a destination and something that can be tapped, and it will take care of the rest.
+
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            List(0..<100) {row in
+                NavigationLink {
+                    Text("Detail View")
+                } label: {
+                    Text("Hello, world!")
+                        .padding()
+                }
+                .navigationTitle("SwiftUI")
+                
+                
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+The Codable protocol makes it trivial to decode flat data: if you’re decoding a single instance of a type, or an array or dictionary of those instances, then things Just Work. However, in this project we’re going to be decoding slightly more complex JSON: there will be an array inside another array, using different data types.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+If you want to decode this kind of hierarchical data, the key is to create separate types for each level you have. As long as the data matches the hierarchy you’ve asked for, Codable is capable of decoding everything with no further work from us.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SwiftUI’s List view is a great way to show scrolling rows of data, but sometimes you also want columns of data – a grid of information, that is able to adapt to show more data on larger screens.
+
+In SwiftUI this is accomplished with two views: LazyHGrid for showing horizontal data, and LazyVGrid for showing vertical data. Just like with lazy stacks, the “lazy” part of the name is there because SwiftUI will automatically delay loading the views it contains until the moment they are needed, meaning that we can display more data without chewing through a lot of system resources
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+struct ContentView: View {
+    var body: some View {
+        ScrollView {
+            let layout = [
+                GridItem(.fixed(80)),
+                GridItem(.fixed(80)),
+                GridItem(.fixed(80))
+            ]
+            
+            LazyVGrid(columns: layout) {
+                ForEach(0..<1000) {
+                    Text("Item \($0)")
+                    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+I tend to rely on these adaptive layouts the most, because they allow grids that make maximum use of available screen space.
+
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ScrollView (.horizontal){
+//            let layout = [
+//                GridItem(.fixed(80)),
+//                GridItem(.fixed(80)),
+//                GridItem(.fixed(80))
+//            ]
+            let layout = [
+                GridItem(.adaptive(minimum: 80 , maximum: 120)),
+            ]
+            LazyHGrid(rows: layout) {
+                ForEach(0..<1000) {
+                    Text("Item \($0)").padding()
+                    
+                    
+                    // more code to come
+                    
+                   
+                }
+            }
+        }
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

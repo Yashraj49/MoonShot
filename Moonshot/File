@@ -1,0 +1,73 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+In this app we’re going to load two different kinds of JSON into Swift structs: one for astronauts, and one for missions. 
+
+If we make these extensions on Color we can use them in a handful of places in SwiftUI, but Swift gives us a better option with only a little more code. You see, Color conforms to a bigger protocol called ShapeStyle that is what lets us use colors, gradients, materials, and more as if they were the same thing.
+
+This ShapeStyle protocol is what the background() modifier uses, so what we really want to do is extend Color but do so in a way that all the SwiftUI modifiers using ShapeStyle work too. This can be done with a very precise extension that literally says “we want to add functionality to ShapeStyle, but only for times when it’s being used as a color.”
+
+To try this out, make a new Swift file called Color-Theme.swift, and give it this code:
+
+extension ShapeStyle where Self == Color {
+    static var darkBackground: Color {
+        Color(red: 0.1, green: 0.1, blue: 0.2)
+    }
+
+    static var lightBackground: Color {
+        Color(red: 0.2, green: 0.2, blue: 0.3)
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+That adds two new colors called darkBackground and lightBackground, each with precise values for red, green, and blue. But more importantly they place those inside a very specific extension that allows us to use those colors everywhere SwiftUI expects a ShapeStyle.
+
+I want to put those new colors into action immediately. First, find the VStack containing the mission name and launch date – it should already have .frame(maxWidth: .infinity) on there, but I’d like you to change its modifier order to this:
+
+.padding(.vertical)
+.frame(maxWidth: .infinity)
+.background(.lightBackground)
+Next, I want to make the outer VStack – the one that is the whole label for our NavigationLink – look more like a box in our grid, which means drawing a line around it and clipping the shape just a little. To get that effect, add these modifiers to the end of it:
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+If you remember, our JSON data is split across missions.json and astronauts.json. This eliminates duplication in our data, because some astronauts took part in multiple missions, but it also means we need to write some code to join our data together – to resolve “armstrong” to “Neil A. Armstrong”, for example. You see, on one side we have missions that know crew member “armstrong” had the role “Commander”, but has no idea who “armstrong” is, and on the other side we have “Neil A. Armstrong” and a description of him, but no concept that he was the commander on Apollo 11.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+That latter case should never happen. To be clear, if you’ve added some JSON to your project that points to missing data in your app, you’ve made a fundamental mistake – it’s not the kind of thing you should try to write error handling for at runtime, because it should never be allowed to happen in the first place. So, this is a great example of where fatalError() is useful: if we can’t find an astronaut using their ID, we should exit immediately and complain loudly.
+
+Let’s put all that into code, using a custom initializer for MissionView. Like I said, this will accept the mission it represents along with all the astronauts, and its job is to store the mission away then figure out the array of resolved astronauts.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+We’ll make that NavigationLink do something more useful shortly, but first we need to modify the NavigationLink in ContentView – it pushes to Text("Detail View") right now
+
+In my project, I think it would be useful to add a little visual separation in our mission view, so that the mission badge, description, and crew are more clearly split up.
+
+SwiftUI does provide a dedicated Divider view for creating a visual divide in your layout, but it’s not customizable – it’s always just a skinny line. So, to get something a little more useful, I’m going to draw a custom divider to break up our view.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+To finish up this view, I’m going to add a title before our crew, but this needs to be done carefully. You see, although this relates to the scroll view, it needs to have the same padding as the rest of our text. So, the best place for this is inside the VStack, directly after the previous rectangle:
+
+Text("Crew")
+    .font(.title.bold())
+    .padding(.bottom, 5)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+To finish this program we’re going to make a third and final view to display astronaut details, which will be reached by tapping one of the astronauts in the mission view. This should mostly just be practice for you, but I hope it also shows you the importance of NavigationView – we’re digging deeper into our app’s information, and the presentation of views sliding in and out really drives that home to the user.
+
+Now we can present that from the NavigationLink inside MissionView. This points to Text("Astronaut details") right now, but we can update it to point to our new AstronautView instead:
+
+AstronautView(astronaut: crewMember.astronaut)
+That was easy, right? But if you run the app now you’ll see how natural it makes our user interface feel – we start at the broadest level of information, showing all our missions, then tap to select one specific mission, then tap to select one specific astronaut. iOS takes care of animating in the new views, but also providing back buttons and swipes to return to previous views.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
