@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
    
-    @Environment(\.colorScheme) var colorScheme
+    //@Environment(\.colorScheme) var colorScheme
 
     enum LayoutType: String, CaseIterable {
         case grid = "Grid"
@@ -65,7 +65,7 @@ struct ContentView: View {
             }
         }
         .background(.darkBackground)
-        .preferredColorScheme(colorScheme == .light ? .light : .dark)
+        //.preferredColorScheme(colorScheme == .light ? .light : .dark)
     }
     
     
