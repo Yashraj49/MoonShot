@@ -21,20 +21,21 @@ struct MissionView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
                     Image(mission.image)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
+                    
                     Text(mission.formatedLaunchDate)
-                        .font(.subheadline).foregroundColor(.secondary)
-
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
                     VStack(alignment: .leading, spacing: 20) {
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 2.5)
                             .frame(height: 5)
                             .foregroundColor(.lightBackground)
-                            .cornerRadius(2.5)
                         
                         Text("Mission Highlights")
                             .font(.title.bold())
@@ -44,10 +45,9 @@ struct MissionView: View {
                         Text(mission.description)
                             .foregroundColor(.white)
                         
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: 1)
                             .frame(height: 2)
                             .foregroundColor(.lightBackground)
-                            .cornerRadius(1)
                             .padding(.vertical)
                         
                         Text("Crew")
@@ -58,7 +58,13 @@ struct MissionView: View {
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [.blue, .black]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
                             .shadow(radius: 10)
                     )
                     
@@ -67,6 +73,10 @@ struct MissionView: View {
                 .padding(.bottom)
             }
         }
+        .navigationTitle(mission.displayName)
+        .navigationBarTitleDisplayMode(.inline)
+        .background(.darkBackground)
+
         .navigationTitle(mission.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .background(.darkBackground)

@@ -72,18 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				E5572F18298833B800367B92 /* MoonshotApp.swift */,
-				E5572F1A298833B800367B92 /* ContentView.swift */,
-				E5B4A344298D516900E30864 /* AstronautView.swift */,
-				E53BCDC1298BAA0B00780748 /* Color-Theme.swift */,
-				E5B4A342298CECC300E30864 /* MissionView.swift */,
-				E5AC05AA298A59D400BE49DA /* Astronaut.swift */,
-				E5AC05AC298A5B8200BE49DA /* Bundle-Decodable.swift */,
-				E5608A38298A8D4C00E5741D /* Mission.swift */,
-				E5AC05A7298A563800BE49DA /* astronauts.json */,
-				E5AC05A6298A563800BE49DA /* missions.json */,
-				E5AC05A4298A49D600BE49DA /* File */,
-				E5572F262988340100367B92 /* OverView File */,
-				E5572F1C298833B900367B92 /* Assets.xcassets */,
+				E5BF7AB629A48663005FE6B6 /* Resources */,
+				E5BF7AB529A48658005FE6B6 /* View */,
+				E5BF7AB429A4863C005FE6B6 /* Model */,
+				E5BF7AB729A48684005FE6B6 /* Tutorials */,
 				E5572F1E298833B900367B92 /* Preview Content */,
 			);
 			path = Moonshot;
@@ -95,6 +87,46 @@
 				E5572F1F298833B900367B92 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E5BF7AB429A4863C005FE6B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E53BCDC1298BAA0B00780748 /* Color-Theme.swift */,
+				E5AC05AA298A59D400BE49DA /* Astronaut.swift */,
+				E5AC05AC298A5B8200BE49DA /* Bundle-Decodable.swift */,
+				E5608A38298A8D4C00E5741D /* Mission.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E5BF7AB529A48658005FE6B6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5572F1A298833B800367B92 /* ContentView.swift */,
+				E5B4A344298D516900E30864 /* AstronautView.swift */,
+				E5B4A342298CECC300E30864 /* MissionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E5BF7AB629A48663005FE6B6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E5572F1C298833B900367B92 /* Assets.xcassets */,
+				E5AC05A7298A563800BE49DA /* astronauts.json */,
+				E5AC05A6298A563800BE49DA /* missions.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E5BF7AB729A48684005FE6B6 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				E5AC05A4298A49D600BE49DA /* File */,
+				E5572F262988340100367B92 /* OverView File */,
+			);
+			path = Tutorials;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
