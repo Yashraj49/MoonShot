@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MissionView: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     let crew: [CrewMember]
     
     struct CrewMember {
@@ -16,56 +16,63 @@ struct MissionView: View {
         let astronaut : Astronaut
     }
     let mission: Mission
-    
+
+    var gradientColors: [Color] {
+        switch colorScheme {
+        case .dark:
+            return [.teal, .black]
+        default:
+            return [.teal, .brown]
+        }
+    }
 
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 20) {
-                    Image(mission.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.6)
+                   
+                        Image(mission.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
+                        
+                        
+                    
                     
                     Text(mission.formatedLaunchDate)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
                     VStack(alignment: .leading, spacing: 20) {
-                        RoundedRectangle(cornerRadius: 2.5)
-                            .frame(height: 5)
-                            .foregroundColor(.lightBackground)
+                        Divider().background(Color.gray)
                         
                         Text("Mission Highlights")
                             .font(.title.bold())
                             .foregroundColor(.white)
-                            .padding(.bottom, 5)
                         
                         Text(mission.description)
                             .foregroundColor(.white)
                         
-                        RoundedRectangle(cornerRadius: 1)
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackground)
-                            .padding(.vertical)
+                        Divider().background(Color.gray).padding(.vertical)
                         
                         Text("Crew")
                             .font(.title.bold())
                             .foregroundColor(.white)
-                            .padding(.bottom, 5)
                     }
+
                     .padding()
                     .background(
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 40)
                             .fill(
                                 LinearGradient(
-                                    gradient: Gradient(colors: [.blue, .black]),
+                                    gradient: Gradient(colors: gradientColors),
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
                             )
-                            .shadow(radius: 10)
+                            .shadow(color: Color.teal.opacity(0.45), radius: 10)
+                            .shadow(radius: 4)
                     )
                     
                     HorizontalCrewScrollView(crew: crew)
@@ -120,8 +127,8 @@ struct HorizontalCrewScrollView: View {
                                 Text(crewMember.astronaut.name)
                                     .foregroundColor(.white)
                                     .font(.headline)
-                                Text(crewMember.role)
-                                    .foregroundColor(.secondary)
+                                Text(crewMember.role).fixedSize()
+                                    .foregroundColor(.gray)
                             }
                         }
                         .padding(.horizontal)
