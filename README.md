@@ -1,7 +1,7 @@
 # MoonShot
 
 
-Moonshot is an iOS app that provides information about all the Apollo missions that occurred between 1961 and 1972. The app provides a brief history of the Apollo program, information about each mission, and details about the astronauts who participated in the missions.
+Moonshot is an iOS app that provides information about all the Apollo missions. The app provides a brief history of the Apollo program, information about each mission, and details about the astronauts who participated in the missions.
 
 The app is built using SwiftUI, Apple's modern framework for building user interfaces across all of their platforms. 
 
