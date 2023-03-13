@@ -152,7 +152,7 @@ struct MissionGridItemView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 40, style: .continuous)
                 .stroke(Color.white, lineWidth: 2)
         )
         .shadow(color: Color.blue, radius: 5, x: 0, y: 5)
