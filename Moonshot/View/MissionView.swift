@@ -10,10 +10,10 @@ import SwiftUI
 struct MissionView: View {
     @Environment(\.colorScheme) var colorScheme
     let crew: [CrewMember]
-    
+
     struct CrewMember {
-        let role : String
-        let astronaut : Astronaut
+        let role: String
+        let astronaut: Astronaut
     }
     let mission: Mission
 
@@ -30,32 +30,29 @@ struct MissionView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 20) {
-                   
-                        Image(mission.image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: geometry.size.width * 0.6)
+
+                    Image(mission.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
-                        
-                        
-                    
-                    
+
                     Text(mission.formatedLaunchDate)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    
+
                     VStack(alignment: .leading, spacing: 20) {
                         Divider().background(Color.gray)
-                        
+
                         Text("Mission Highlights")
                             .font(.title.bold())
                             .foregroundColor(.white)
-                        
+
                         Text(mission.description)
                             .foregroundColor(.white)
-                        
+
                         Divider().background(Color.gray).padding(.vertical)
-                        
+
                         Text("Crew")
                             .font(.title.bold())
                             .foregroundColor(.white)
@@ -74,8 +71,30 @@ struct MissionView: View {
                             .shadow(color: Color.teal.opacity(0.45), radius: 10)
                             .shadow(radius: 4)
                     )
-                    
-                    HorizontalCrewScrollView(crew: crew)
+
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(crew, id: \.role) { crewMember in
+                            NavigationLink {
+                                AstronautView(astronaut: crewMember.astronaut)
+                            } label: {
+                                HStack {
+                                    Image(crewMember.astronaut.id)
+                                        .resizable()
+                                        .frame(width: 64, height: 64)
+                                        .clipShape(Circle())
+
+                                    VStack(alignment: .leading) {
+                                        Text(crewMember.astronaut.name)
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                        Text(crewMember.role).fixedSize()
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
                 }
                 .padding(.bottom)
             }

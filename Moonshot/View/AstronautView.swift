@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct AstronautView: View {
-    let astronaut : Astronaut
-    
+    let astronaut: Astronaut
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 30) {
+            LazyVStack(alignment: .leading, spacing: 30) {
                 Image(astronaut.id)
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 400)
                     .cornerRadius(30)
                     .shadow(radius: 10)
-                
+
+                Text(astronaut.name)
+                    .font(.headline)
+                    .foregroundColor(.white)
+
                 Text(astronaut.description)
                     .font(.body)
                     .foregroundColor(.white)
@@ -35,17 +39,19 @@ struct AstronautView: View {
                 endPoint: .bottomTrailing
             )
         )
-        .navigationTitle(astronaut.name)
+        .navigationBarTitle(Text("Astronaut"))
         .navigationBarTitleDisplayMode(.inline)
     }
-
 }
- 
+
 struct AstronautView_Previews: PreviewProvider {
-    
-    static let astronauts : [String : Astronaut] = Bundle.main.decode("astronauts.json")
-    
+
+    static let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+
     static var previews: some View {
         AstronautView(astronaut: astronauts["armstrong"]!)
     }
 }
+
+
+

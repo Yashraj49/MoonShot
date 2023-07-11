@@ -130,17 +130,18 @@ struct MissionCrewView: View {
 
 struct MissionGridItemView: View {
     let mission: Mission
-    
+
     var body: some View {
-        VStack {
+        LazyVStack {
             Image(mission.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 150, height: 110)
                 .padding()
-            VStack(spacing: 5) {
+
+            LazyVStack(spacing: 5) {
                 Text(mission.displayName)
-                    .font(.headline)
+                    .font(.title2)
                     .foregroundColor(.white)
                 Text(mission.formatedLaunchDate)
                     .font(.caption)
@@ -156,8 +157,10 @@ struct MissionGridItemView: View {
                 .stroke(Color.white, lineWidth: 2)
         )
         .shadow(color: Color.blue, radius: 5, x: 0, y: 5)
+        .navigationBarTitle(Text("Missions"))
     }
 }
+
 
 struct MissionListItemView: View {
     let mission: Mission
