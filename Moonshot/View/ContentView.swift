@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-   
-    //@Environment(\.colorScheme) var colorScheme
 
     enum LayoutType: String, CaseIterable {
         case grid = "Grid"
@@ -22,7 +20,10 @@ struct ContentView: View {
     @State private var layout: LayoutType = .grid
     
     var body: some View {
-        NavigationView {
+        VStack {
+            
+
+            
             Group {
                 if layout == .grid {
                     // Show missions as a grid
@@ -52,9 +53,9 @@ struct ContentView: View {
                     .listStyle(.plain)
                 }
             }
-            .navigationTitle("Moonshot")
+            
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Picker(selection: $layout, label: Text("Layout"), content: {
                         ForEach(LayoutType.allCases, id: \.self) { layoutType in
                             Text(layoutType.rawValue)
@@ -64,10 +65,13 @@ struct ContentView: View {
                 }
             }
         }
-        .background(.darkBackground)
+        
+        
+        
+      //  .background(.darkBackground)
         //.preferredColorScheme(colorScheme == .light ? .light : .dark)
     }
-    
+        
     
     
 }

@@ -99,13 +99,12 @@ struct MissionView: View {
                 .padding(.bottom)
             }
         }
+       
         .navigationTitle(mission.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .background(.darkBackground)
 
-        .navigationTitle(mission.displayName)
-        .navigationBarTitleDisplayMode(.inline)
-        .background(.darkBackground)
+        
     }
     
     init(mission: Mission, astronauts: [String: Astronaut]) {
