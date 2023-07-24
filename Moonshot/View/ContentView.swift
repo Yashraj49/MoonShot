@@ -34,10 +34,14 @@ struct ContentView: View {
                                     destination: MissionView(mission: mission, astronauts: astronauts),
                                     label: {
                                         MissionGridItemView(mission: mission)
+                                        
+                                        
                                     }
+                                        
                                 )
                             }
                         }
+                            
                         .padding([.horizontal, .bottom])
                     }
                 } else {
@@ -155,6 +159,7 @@ struct MissionGridItemView: View {
             .padding(.vertical)
             .background(LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom))
         }
+        
         .clipShape(RoundedRectangle(cornerRadius: 40, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 40, style: .continuous)

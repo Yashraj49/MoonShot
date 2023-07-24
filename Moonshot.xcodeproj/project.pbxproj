@@ -26,6 +26,7 @@
 		E5AC05AD298A5B8200BE49DA /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AC05AC298A5B8200BE49DA /* Bundle-Decodable.swift */; };
 		E5B4A343298CECC300E30864 /* MissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B4A342298CECC300E30864 /* MissionView.swift */; };
 		E5B4A345298D516A00E30864 /* AstronautView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B4A344298D516900E30864 /* AstronautView.swift */; };
+		E5EEED142A6EC250009FECE7 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EEED132A6EC250009FECE7 /* SplashScreen.swift */; };
 		E5FDB7932A6B8BCD006E8AB9 /* Descriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FDB7922A6B8BCD006E8AB9 /* Descriptions.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		E5AC05AC298A5B8200BE49DA /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		E5B4A342298CECC300E30864 /* MissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionView.swift; sourceTree = "<group>"; };
 		E5B4A344298D516900E30864 /* AstronautView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronautView.swift; sourceTree = "<group>"; };
+		E5EEED132A6EC250009FECE7 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		E5FDB7922A6B8BCD006E8AB9 /* Descriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Descriptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 		E5BF7AB629A48663005FE6B6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5EEED132A6EC250009FECE7 /* SplashScreen.swift */,
 				E5572F1C298833B900367B92 /* Assets.xcassets */,
 				E5AC05A7298A563800BE49DA /* astronauts.json */,
 				E5AC05A6298A563800BE49DA /* missions.json */,
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5EEED142A6EC250009FECE7 /* SplashScreen.swift in Sources */,
 				E5B4A343298CECC300E30864 /* MissionView.swift in Sources */,
 				E5AC05AB298A59D400BE49DA /* Astronaut.swift in Sources */,
 				E5B4A345298D516A00E30864 /* AstronautView.swift in Sources */,

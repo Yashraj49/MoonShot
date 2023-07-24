@@ -4,7 +4,7 @@
 //
 //  Created by Yashraj jadhav on 20/07/23.
 //
-
+import UIKit
 import SwiftUI
 
 struct itemDetailView: View {
@@ -12,25 +12,40 @@ struct itemDetailView: View {
     
     private let backgroundOpacity: Double = 0.2
 
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                HeaderView(itemZ: itemY)
-                    .font(.title)
-                    .padding()
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
+        
+        ScrollView{
+          
+                LazyVStack {
+                    HeaderView(itemZ: itemY)
+                        .font(.title)
+                        .padding()
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        
+                    
                 
-                Text(itemY.description)
-                    .foregroundColor(Color("ColorEx"))
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                    .background(Color.white.opacity(backgroundOpacity))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-            }
+                    
+                    Text(itemY.description)
+                        .foregroundColor(Color("ColorEx"))
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                        .background(Color.white.opacity(backgroundOpacity))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                
+                
+            
+            
+            
         }
+        
+        
+        
+        
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [Color.gray, Color.blue, Color.purple, Color.gray]),
