@@ -18,3 +18,5 @@ Getting Started
 To get started with Moonshot, you'll need to have Xcode installed on your Mac. You can download Xcode from the Mac App Store or from Apple's developer website.
 
 Once you have Xcode installed, you can clone this repository to your local machine and open it in Xcode. From there, you can build and run the app on your simulator or a physical iOS device
+
+  ![Image 06-01-24 at 4 48 PM](https://github.com/Yashraj49/MoonShot/assets/88454884/358bcebd-e464-4cbd-acd7-9f8a069c72e6)
